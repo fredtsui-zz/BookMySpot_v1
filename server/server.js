@@ -31,5 +31,15 @@ app.post('/api/world', (req, res) => {
   );
 });
 
+// todo: 
+app.get('/api/login/:pswd', (req, res) => {
+    const password = req.params.pswd;
+    res.json({success: (password == "<3holiday")});
+})
+app.get('/api/events', (req, res) => {});
+app.post('/api/event/:name/', (req, res) => {});
+app.post('/api/booking/:event/', (req, res) => {});
+app.get('/api/events', (req, res) => {});
+
 
 app.listen(port, () => console.log(`Listening on port ${port}`));
