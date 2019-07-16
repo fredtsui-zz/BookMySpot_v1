@@ -1,25 +1,27 @@
 const express = require('express');
 const bodyParser = require('body-parser');
-const mongoClient = require("mongodb").MongoClient;
 const app = express();
+const mysql = require('mysql');
 const port = process.env.PORT || 5000;
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
-const url = 'mongodb://localhost:27017';
-const eventsDB = "events";
-const bookingsDB = "bookings";
 
-const client = new mongoClient(url);
+const connection = mysql.createConnection({
+  host: 'localhost',
+  user: 'root',
+  password: 'password',
+  database: 'new_schema'
+});
 
-client.connect((err) => {
-    if(err === null){
-        console.log("connected to mongodb!");
-        const events = client.db(eventsDB);
-        const bookings = client.db(bookingsDB);
-    }
-    client.close();
-})
+connection.connect((err) => {
+  if(err) {
+    console.log("error connecting to database: " + err.stack);
+    return;
+  }
+  console.log("connected to mysql database!");
+});
+
 
 app.get('/api/hello', (req, res) => {
   res.send({ express: 'Hello From Express' });
