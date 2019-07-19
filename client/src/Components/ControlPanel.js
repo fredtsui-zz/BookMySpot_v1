@@ -36,7 +36,7 @@ function GetClientsDialog(props) {
     const {open, handleClose, title} = props;
     const [query, setQuery] = React.useState({name: ""});
     const handleSubmit = () => {
-        if(!query.name || query.name == "") {
+        if(!query.name || query.name === "") {
             console.log('calling get all clients');
         } else {
             console.log('calling get clients where name = ' + query.name);
