@@ -23,7 +23,13 @@ const useStyles = makeStyles(theme => ({
 
   
 export default function DataDisplay(props) {
-    const {colnames, data} = props;    
+    const {data} = props;    
+    // data are list of objects, we can just extract the column names out
+    let colnames = [];
+    if(data && data[0]){
+        console.log(data[0]);
+        colnames = Object.keys(data[0]);
+    }
     const classes = useStyles();
   
     return (
@@ -41,17 +47,22 @@ export default function DataDisplay(props) {
             </TableRow>
           </TableHead>
           <TableBody>
-            {data && data.map(row => (
-              <TableRow key={row.name}>
-                <TableCell component="th" scope="row">
-                  {row.name}
-                </TableCell>
-                <TableCell align="right">{row.calories}</TableCell>
-                <TableCell align="right">{row.fat}</TableCell>
-                <TableCell align="right">{row.carbs}</TableCell>
-                <TableCell align="right">{row.protein}</TableCell>
+            {data && data.map((row, i) => {
+                //console.log(row);
+                return (
+              <TableRow key={i}>
+                {colnames && colnames.map((col, index) => {
+                    console.log(col);
+                    console.log(index);
+                    console.log(row[col]);
+                    if(index == 0) {
+                        return (<TableCell >{row[col]}</TableCell>)
+                    } else {
+                        return  (<TableCell align="right">{row[col]}</TableCell>)
+                    }
+                })}
               </TableRow>
-            ))}
+            ) })}
           </TableBody>
         </Table>
       </Paper>

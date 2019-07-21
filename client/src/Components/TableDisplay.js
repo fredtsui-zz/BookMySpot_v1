@@ -23,18 +23,25 @@ function createData(name, calories, fat, carbs, protein) {
 
 
 
-export default function TableDisplay() {
+export default function TableDisplay(props) {
     const classes = useStyles();
-    const rows = [
-      createData('Frozen yoghurt', 159, 6.0, 24, 4.0),
-      createData('Ice cream sandwich', 237, 9.0, 37, 4.3),
-      createData('Eclair', 262, 16.0, 24, 6.0),
-      createData('Cupcake', 305, 3.7, 67, 4.3),
-      createData('Gingerbread', 356, 16.0, 49, 3.9),
-    ];
+    let data;
+    if(props.data){
+        data = props.data;
+    }
+    else {
+        data = [
+          createData('Frozen yoghurt', 159, 6.0, 24, 4.0),
+          createData('Ice cream sandwich', 237, 9.0, 37, 4.3),
+          createData('Eclair', 262, 16.0, 24, 6.0),
+          createData('Cupcake', 305, 3.7, 67, 4.3),
+          createData('Gingerbread', 356, 16.0, 49, 3.9),
+        ];
+    }
+    
     return (
       <div className={classes.root}>
-        <DataDisplay colnames={['Dessert (100g serving)', 'Calories', 'Fat&nbsp;(g)', 'Carbs&nbsp;(g)', 'Protein&nbsp;(g)']} data={rows} />
+        <DataDisplay data={data} />
       </div>
     );
 }

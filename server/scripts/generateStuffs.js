@@ -72,5 +72,19 @@ const generateSuppliers = () => {
 }
 
 const generateInvitees = () => {
-    
+    const fname = faker.name.firstName();
+    const lname = faker.name.lastName();
+    return {
+        email: faker.internet.email(fname, lname, faker.internet.domainName()),
+        name: fname + ' ' + lname
+    }
 }
+
+
+module.exports = {
+    generateClient,
+    generateInvitees,
+    generateLocation,
+    generateOptions,
+    generateSuppliers
+};
