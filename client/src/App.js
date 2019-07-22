@@ -8,7 +8,7 @@ export default function App() {
   return (
     <div className="App">
       <ControlPanel updateData={setData}/>
-      <TableDisplay data={data}/>
+      <TableDisplay data={data} updateData={setData} />
     </div>
   );
 }

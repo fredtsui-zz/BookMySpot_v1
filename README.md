@@ -23,10 +23,6 @@ npm install
 - various functionalities
 
 ### todo:
- - `getTotalExpenseFromClient`
- - `getClientIDOverCapacity`
- - `getAllSuppliersInEvent`
  - `updateBill`
- - `getAllRequirementFromOneEvent`
  - `getAllOfferFromOfferID`
- - `deleteEventLongTimeAgo` ? 
+ - `deleteEventLongTimeAgo`

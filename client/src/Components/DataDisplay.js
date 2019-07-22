@@ -28,7 +28,7 @@ const useStyles = makeStyles(theme => ({
 
   
 export default function DataDisplay(props) {
-    const {data} = props;    
+    const {data, updateData} = props;    
     const [anchorEl, setAnchorEl] = React.useState(null);
     const [open, setOpen] = React.useState('');
     const [subID, setSubID] = React.useState(null);
@@ -52,13 +52,29 @@ export default function DataDisplay(props) {
         colnames = Object.keys(data[0]);
     }
     const classes = useStyles();
+    const getClientTotalExpense = (clientID) => async () => {
+      const response = await fetch('/api/getTotalExpenseFromClient/' + clientID);
+      const data = await response.json();
+      updateData(data[0]);
+    }
+    const getSuppliers = (eID) => async () => {
+      const response = await fetch('/api/getAllSuppliersInEvent/' + eID);
+      const data = await response.json();
+      updateData(data[0]);
+    }
+    const getRequirements = (eID) => async() => {
+      const response = await fetch('/api/getAllRequirementFromOneEvent/' + eID);
+      const data = await response.json();
+      updateData(data[0]);
+    }
     const needActionButton = 
             colnames.includes('EventID') || 
             colnames.includes('LocationID') || 
             colnames.includes('SupplierID');
     let actionPopup;
+    let clientTotalExpense;
     if(colnames.includes('EventID')) {
-      actionPopup = (
+      actionPopup = (id) => (
       <Popover
         open={Boolean(anchorEl)}
         anchorEl={anchorEl}
@@ -73,9 +89,11 @@ export default function DataDisplay(props) {
         }}>
           <Button onClick={handleOpenPopup('add invitee')}>Invite People</Button>
           <Button onClick={handleOpenPopup('add requirement')}>Add Requirements</Button>
+          <Button onClick={getSuppliers(id)}>Get Suppliers</Button>
+          <Button onClick={getRequirements(id)}>Get Requirements</Button>
       </Popover>)
     } else if (colnames.includes('LocationName')) {
-      actionPopup = (
+      actionPopup = () => (
         <Popover
           open={Boolean(anchorEl)}
           anchorEl={anchorEl}
@@ -91,7 +109,7 @@ export default function DataDisplay(props) {
             <Button onClick={handleOpenPopup('add event')}>Create Event</Button>
         </Popover>)
     } else if (colnames.includes('SupplierName')) {
-      actionPopup = (
+      actionPopup = () => (
         <Popover
           open={Boolean(anchorEl)}
           anchorEl={anchorEl}
@@ -106,6 +124,21 @@ export default function DataDisplay(props) {
           }}>
             <Button onClick={handleOpenPopup('add option offer')}>Add Option Offer</Button>
         </Popover>)
+    } else if (colnames.includes('ClientID')) {
+      actionPopup = (id) => (<Popover
+          open={Boolean(anchorEl)}
+          anchorEl={anchorEl}
+          onClose={handleCloseAction}
+          anchorOrigin={{
+            vertical: 'bottom',
+            horizontal: 'center',
+          }}
+          transformOrigin={{
+            vertical: 'top',
+            horizontal: 'center',
+          }}>
+            <Button onClick={getClientTotalExpense(id)}>Get Total Expense</Button>
+        </Popover>);
     }
   
     return (
@@ -121,7 +154,7 @@ export default function DataDisplay(props) {
                         return (<TableCell align="right">{name} </TableCell>);
                     }
                 })}
-                {actionPopup? <TableCell></TableCell>: null}
+                {(actionPopup)? <TableCell>Actions</TableCell>: null}
             </TableRow>
           </TableHead>
           <TableBody>
@@ -133,6 +166,8 @@ export default function DataDisplay(props) {
                   id = row.LocationName;
                 } else if (colnames.includes('SupplierName')) {
                   id = row.SupplierName;
+                } else if (colnames.includes('ClientID')) {
+                  id = row.ClientID;
                 }
                 return (
               <TableRow key={i} >
@@ -147,7 +182,7 @@ export default function DataDisplay(props) {
                   <Button onClick={handleOpenAction(id)}>
                     +
                   </Button>
-                  {actionPopup}
+                  {actionPopup(id)}
                 </TableCell>: null}
               </TableRow>
             ) })}

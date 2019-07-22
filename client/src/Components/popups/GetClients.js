@@ -11,6 +11,16 @@ import TextField from '@material-ui/core/TextField';
 export default function GetClientsDialog(props) {
     const {open, handleClose, title, updateData} = props;
     const [query, setQuery] = React.useState({});
+    const handleFindOverCapacity = async () => {
+        let url = '/api/getClientIDOverCapacity';
+        const response = await fetch(url);
+        const data = await response.json();
+        if(!data){
+            console.log('no data returned, something wrong might happened at server');
+        }
+        updateData(data[0]);
+        handleClose();
+    }
     const handleSubmit = async () => {
         let url;
         if(!query.clientID || query.clientID === "") {
@@ -46,8 +56,11 @@ export default function GetClientsDialog(props) {
                 <Button onClick={handleClose} color="primary">
                     Cancel
                 </Button>
+                <Button onClick={handleFindOverCapacity} color="primary">
+                    Find Over Capacity
+                </Button>
                 <Button onClick={handleSubmit} color="primary">
-                    Query
+                    Find
                 </Button>
             </DialogActions>
         </Dialog>

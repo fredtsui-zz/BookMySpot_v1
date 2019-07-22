@@ -25,9 +25,11 @@ function createData(name, calories, fat, carbs, protein) {
 
 export default function TableDisplay(props) {
     const classes = useStyles();
+    const updateData = props.updateData;
     let data;
     if(props.data){
         data = props.data;
+
     }
     else {
         data = [
@@ -41,7 +43,7 @@ export default function TableDisplay(props) {
     
     return (
       <div className={classes.root}>
-        <DataDisplay data={data} />
+        <DataDisplay data={data} updateData={updateData}/>
       </div>
     );
 }
