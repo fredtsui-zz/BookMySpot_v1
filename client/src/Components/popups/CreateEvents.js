@@ -10,20 +10,18 @@ import TextField from '@material-ui/core/TextField';
 
 export default function CreateEventsDialog(props) {
     const {open, handleClose, title, subID} = props;
-    const [query, setQuery] = React.useState({
-        LocationName: subID
-    });
+    const [query, setQuery] = React.useState({});
 
     const handleSubmit = async () => {
-        console.log(query);
-        if(query.ClientName) {
+        if(query.ClientID) {
+            console.log(query);
             console.log('calling insertNewEvent');
             const response = await fetch('/api/insertNewEvent', {
                 method: 'POST',
                 headers: {
                   'Content-Type': 'application/json',
                 },
-                body: JSON.stringify(query),
+                body: JSON.stringify({...query, LocationName: subID}),
               });
             const data = await response.text();
             if(data){
@@ -64,6 +62,8 @@ export default function CreateEventsDialog(props) {
                 <TextField onChange={handleChange('Budget')}/>
                 <DialogContentText>Total People</DialogContentText>
                 <TextField onChange={handleChange('NumberOfInvites')}/>
+                <DialogContentText>Billing Info</DialogContentText>
+                <TextField onChange={handleChange('Bill')}/>
                 
             
             </DialogContent>

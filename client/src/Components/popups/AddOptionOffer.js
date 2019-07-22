@@ -10,13 +10,11 @@ import TextField from '@material-ui/core/TextField';
 
 export default function AddOptionOfferDialog(props) {
     const {open, handleClose, title, subID} = props;
-    const [query, setQuery] = React.useState({
-        SupplierName: subID
-    });
+    const [query, setQuery] = React.useState({});
     if(!subID) {
-        return <Dialog open={open} onClose={handleClose} >
+        return (<Dialog open={open} onClose={handleClose} >
             Need to provide a valid Supplier Name
-        </Dialog>
+        </Dialog> );
     }
     const handleSubmit = async () => {
         if(query.SupplierName) {
@@ -26,7 +24,7 @@ export default function AddOptionOfferDialog(props) {
                 headers: {
                   'Content-Type': 'application/json',
                 },
-                body: JSON.stringify(query),
+                body: JSON.stringify({...query, SupplierName: subID}),
               });
             const data = await response.text();
             if(data){

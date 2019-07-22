@@ -6,7 +6,7 @@ const connection = mysql.createConnection({
     host: 'localhost',
     user: 'root',
     password: 'password',
-    database: 'eventorg'
+    database: 'new_schema'
 });
 
 
@@ -508,7 +508,7 @@ module.exports = {
     },
     //Post
     insertNewEvent: (req, res) => {
-        var ClientID = req.body.ClientID;
+        var ClientID = parseInt(req.body.ClientID);
         var LocationName = req.body.LocationName;
         var Type = req.body.Type;
         var StartTime = req.body.StartTime;
@@ -528,7 +528,7 @@ module.exports = {
     },
 
     updateEvent: (req, res) => {
-        var EventID = req.body.EventID;
+        var EventID = parseInt(req.body.EventID);
         var StartTime = req.body.StartTime;
         var EndTime = req.body.EndTime;
         var Budget = req.body.Budget;
@@ -544,7 +544,7 @@ module.exports = {
     },
 
     updateBill: (req, res) => {
-        var EventID = req.body.EventID;
+        var EventID = parseInt(req.body.EventID);
         connection.query("call updateBill(?)", [EventID],function (err, result) {
             if (err) {
                 console.log("err:", err);

@@ -33,6 +33,7 @@ export default function DataDisplay(props) {
     const [open, setOpen] = React.useState('');
     const [subID, setSubID] = React.useState(null);
     const handleCloseAction = () => {
+      setSubID(null);
       setAnchorEl(null);
     }
     const handleOpenAction = (id) => (event) => {

@@ -17,3 +17,16 @@ npm install
 ### 2. startup
   `yarn dev`
   
+
+### Presentation:
+- create event:
+- various functionalities
+
+### todo:
+ - `getTotalExpenseFromClient`
+ - `getClientIDOverCapacity`
+ - `getAllSuppliersInEvent`
+ - `updateBill`
+ - `getAllRequirementFromOneEvent`
+ - `getAllOfferFromOfferID`
+ - `deleteEventLongTimeAgo` ? 
