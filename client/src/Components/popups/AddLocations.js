@@ -8,14 +8,14 @@ import DialogTitle from '@material-ui/core/DialogTitle';
 import Button from '@material-ui/core/Button';
 import TextField from '@material-ui/core/TextField';
 
-export default function AddClientsDialog(props) {
+export default function AddLocationsDialog(props) {
     const {open, handleClose, title, updateData} = props;
     const [query, setQuery] = React.useState({});
     const handleSubmit = async () => {
         console.log(query);
-        if(query.ClientName) {
-            console.log('calling add clients');
-            const response = await fetch('/api/insertNewClients', {
+        if(query.LocationID) {
+            console.log('calling insertLocation');
+            const response = await fetch('/api/insertLocation', {
                 method: 'POST',
                 headers: {
                   'Content-Type': 'application/json',
@@ -30,9 +30,8 @@ export default function AddClientsDialog(props) {
             }
         } else {
             alert('Error: no name as input');
-        }
-        // then retrieve all the clients back
-        const response = await fetch('/api/getAllClients');
+        }// then retrieve all the clients back
+        const response = await fetch('/api/getAllLocation');
         const data = await response.json();
         updateData(data[0]);
         handleClose();
@@ -46,16 +45,20 @@ export default function AddClientsDialog(props) {
         <Dialog open={open} onClose={handleClose} >
             <DialogTitle>{title}</DialogTitle>
             <DialogContent>
-                <DialogContentText>Name</DialogContentText>
-                <TextField onChange={handleChange('ClientName')}/>
-                <DialogContentText>Address</DialogContentText>
-                <TextField onChange={handleChange('Address')}/>
-                <DialogContentText>Email</DialogContentText>
-                <TextField onChange={handleChange('Email')}/>
+                <DialogContentText>LocationName</DialogContentText>
+                <TextField onChange={handleChange('LocationID')}/>
+                <DialogContentText>Capability</DialogContentText>
+                <TextField onChange={handleChange('Capability')}/>
                 <DialogContentText>Phone</DialogContentText>
                 <TextField onChange={handleChange('Phone')}/>
-                <DialogContentText>BillingInfo</DialogContentText>
-                <TextField onChange={handleChange('BillingInfo')}/>
+                <DialogContentText>Hours</DialogContentText>
+                <TextField onChange={handleChange('Hours')}/>
+                <DialogContentText>Address</DialogContentText>
+                <TextField onChange={handleChange('Address')}/>
+                <DialogContentText>City</DialogContentText>
+                <TextField onChange={handleChange('City')}/>
+                <DialogContentText>Province</DialogContentText>
+                <TextField onChange={handleChange('Province')}/>
             
             </DialogContent>
 

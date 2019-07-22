@@ -8,14 +8,20 @@ import DialogTitle from '@material-ui/core/DialogTitle';
 import Button from '@material-ui/core/Button';
 import TextField from '@material-ui/core/TextField';
 
-export default function AddClientsDialog(props) {
-    const {open, handleClose, title, updateData} = props;
-    const [query, setQuery] = React.useState({});
+export default function AddOptionOfferDialog(props) {
+    const {open, handleClose, title, subID} = props;
+    const [query, setQuery] = React.useState({
+        SupplierName: subID
+    });
+    if(!subID) {
+        return <Dialog open={open} onClose={handleClose} >
+            Need to provide a valid Supplier Name
+        </Dialog>
+    }
     const handleSubmit = async () => {
-        console.log(query);
-        if(query.ClientName) {
-            console.log('calling add clients');
-            const response = await fetch('/api/insertNewClients', {
+        if(query.SupplierName) {
+            console.log('calling insertNewOptionOffer');
+            const response = await fetch('/api/insertNewOptionOffer', {
                 method: 'POST',
                 headers: {
                   'Content-Type': 'application/json',
@@ -31,10 +37,6 @@ export default function AddClientsDialog(props) {
         } else {
             alert('Error: no name as input');
         }
-        // then retrieve all the clients back
-        const response = await fetch('/api/getAllClients');
-        const data = await response.json();
-        updateData(data[0]);
         handleClose();
     }
 
@@ -46,17 +48,12 @@ export default function AddClientsDialog(props) {
         <Dialog open={open} onClose={handleClose} >
             <DialogTitle>{title}</DialogTitle>
             <DialogContent>
-                <DialogContentText>Name</DialogContentText>
-                <TextField onChange={handleChange('ClientName')}/>
-                <DialogContentText>Address</DialogContentText>
-                <TextField onChange={handleChange('Address')}/>
-                <DialogContentText>Email</DialogContentText>
-                <TextField onChange={handleChange('Email')}/>
-                <DialogContentText>Phone</DialogContentText>
-                <TextField onChange={handleChange('Phone')}/>
-                <DialogContentText>BillingInfo</DialogContentText>
-                <TextField onChange={handleChange('BillingInfo')}/>
-            
+                <DialogContentText>Option Name</DialogContentText>
+                <TextField onChange={handleChange('OptionName')}/>
+                <DialogContentText>Price</DialogContentText>
+                <TextField onChange={handleChange('Price')}/>
+                <DialogContentText>Stock</DialogContentText>
+                <TextField onChange={handleChange('Stock')}/>
             </DialogContent>
 
             <DialogActions>

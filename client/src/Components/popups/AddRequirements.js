@@ -8,19 +8,23 @@ import DialogTitle from '@material-ui/core/DialogTitle';
 import Button from '@material-ui/core/Button';
 import TextField from '@material-ui/core/TextField';
 
-export default function AddClientsDialog(props) {
-    const {open, handleClose, title, updateData} = props;
+export default function AddRequirementsDialog(props) {
+    const {open, handleClose, title, subID} = props;
     const [query, setQuery] = React.useState({});
+    if(!subID) {
+        return <Dialog open={open} onClose={handleClose} >
+            <DialogContentText>No EventID provided</DialogContentText>
+        </Dialog>
+    }
     const handleSubmit = async () => {
-        console.log(query);
-        if(query.ClientName) {
-            console.log('calling add clients');
-            const response = await fetch('/api/insertNewClients', {
+        if(subID) {
+            console.log('calling insertNewRequirement');
+            const response = await fetch('/api/insertNewRequirement', {
                 method: 'POST',
                 headers: {
                   'Content-Type': 'application/json',
                 },
-                body: JSON.stringify(query),
+                body: JSON.stringify({...query, EventID: subID}),
               });
             const data = await response.text();
             if(data){
@@ -31,10 +35,6 @@ export default function AddClientsDialog(props) {
         } else {
             alert('Error: no name as input');
         }
-        // then retrieve all the clients back
-        const response = await fetch('/api/getAllClients');
-        const data = await response.json();
-        updateData(data[0]);
         handleClose();
     }
 
@@ -43,20 +43,13 @@ export default function AddClientsDialog(props) {
     }
 
     return (
-        <Dialog open={open} onClose={handleClose} >
+        <Dialog fullWidth open={open} onClose={handleClose} >
             <DialogTitle>{title}</DialogTitle>
             <DialogContent>
-                <DialogContentText>Name</DialogContentText>
-                <TextField onChange={handleChange('ClientName')}/>
-                <DialogContentText>Address</DialogContentText>
-                <TextField onChange={handleChange('Address')}/>
-                <DialogContentText>Email</DialogContentText>
-                <TextField onChange={handleChange('Email')}/>
-                <DialogContentText>Phone</DialogContentText>
-                <TextField onChange={handleChange('Phone')}/>
-                <DialogContentText>BillingInfo</DialogContentText>
-                <TextField onChange={handleChange('BillingInfo')}/>
-            
+                <DialogContentText>Offer Id</DialogContentText>
+                <TextField onChange={handleChange('OfferId')}/>
+                <DialogContentText>Amount</DialogContentText>
+                <TextField onChange={handleChange('Amount')}/>
             </DialogContent>
 
             <DialogActions>

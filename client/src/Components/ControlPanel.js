@@ -9,6 +9,12 @@ import Divider from '@material-ui/core/Divider';
 import Paper from '@material-ui/core/Paper';
 import GetClientsDialog from './popups/GetClients';
 import AddClientsDialog from './popups/AddClients';
+import GetLocationsDialog from './popups/GetLocations';
+import GetEventsDialog from './popups/GetEvents';
+import AddSuppliersDialog from './popups/AddSuppliers';
+import AddLocationsDialog from './popups/AddLocations';
+import GetOptionOffersDialog from './popups/getOptionOffers';
+import GetSuppliersDialog from './popups/GetSuppliers';
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -28,52 +34,120 @@ const useStyles = makeStyles(theme => ({
 }));
 
 
+
+
 export default function ControlPanel(props) {
   const {updateData} = props;
-  const [open1, setOpen1] = React.useState(false);
-  const [open2, setOpen2] = React.useState(false);
+  const [open, setOpen] = React.useState("");
 
   const classes = useStyles();
 
-  const handleOpen1 = () => {
-      setOpen1(true);
-  };
+  const getAllClients = async () => {
+    const response = await fetch('/api/getAllClients');
+    const data = await response.json();
+    updateData(data[0]);
+  }
 
-  const handleClose1 = () => {
-    setOpen1(false);
-  };
+  const getAllLocations = async () => {
+    const response = await fetch('/api/getAllLocation');
+    const data = await response.json();
+    updateData(data[0]);
+  }
 
-  const handleOpen2 = () => {
-      setOpen2(true);
-  };
-  
-  const handleClose2 = () => {
-    setOpen2(false);
-  };
+  const handleOpen = (name) => () => {
+    setOpen(name);
+  }
+
+  const handleClose = () => {
+      setOpen('');
+  }
 
   return (
     <div  className={classes.root}>
         <Paper className={classes.addMarging}>
             <List component="nav" aria-label="Main mailbox folders">
-                <ListItem button>
+                <ListItem button onClick={getAllClients}>
                 <ListItemText primary="Get All Clients" />
                 </ListItem>
-                <ListItem button>
-                <ListItemText primary="Get All Suppliers" />
+                <ListItem button onClick={getAllLocations}>
+                <ListItemText primary="Get All Locations" />
                 </ListItem>
             </List>
             <Divider />
-            <List component="nav" aria-label="Secondary mailbox folders">
-                <ListItem button onClick={handleOpen1}>
+            <List component="nav">
+                <ListItem button onClick={handleOpen('get event')}>
+                <ListItemText primary="query events" />
+                </ListItem>
+                <ListItem button onClick={handleOpen('get client')}>
                 <ListItemText primary="query clients" />
                 </ListItem>
-                <ListItem button onClick={handleOpen2}>
+                <ListItem button onClick={handleOpen('get supplier')}>
+                <ListItemText primary="get supplier" />
+                </ListItem>
+                <ListItem button onClick={handleOpen('get location')}>
+                <ListItemText primary="query locations" />
+                </ListItem>
+                <ListItem button onClick={handleOpen('add client')}>
                 <ListItemText primary="add a client" />
                 </ListItem>
+                <ListItem button onClick={handleOpen('add supplier')}>
+                <ListItemText primary="add suppliers" />
+                </ListItem>
+                <ListItem button onClick={handleOpen('add event')}>
+                <ListItemText primary="add events" />
+                </ListItem>
+                <ListItem button onClick={handleOpen('add location')}>
+                <ListItemText primary="add locations" />
+                </ListItem>
+                <ListItem button onClick={handleOpen('add option offer')}>
+                <ListItemText primary="add option offer" />
+                </ListItem>
+                <ListItem button onClick={handleOpen('get option offer')}>
+                <ListItemText primary="get option offer" />
+                </ListItem>
+                
             </List>
         </Paper>
-        <GetClientsDialog open={open1} handleClose={handleClose1} updateData={updateData} title="query clients parameters"/>
-        <AddClientsDialog open={open2} handleClose={handleClose2} updateData={() => {console.log('succeed')}} title="add client"/>
+        <GetClientsDialog 
+            open={open == "get client"} 
+            handleClose={handleClose} 
+            updateData={updateData} 
+            title="Find Clients"/>
+        <AddClientsDialog 
+            open={open == "add client"} 
+            handleClose={handleClose} 
+            updateData={updateData} 
+            title="Add Client"/>
+        <GetLocationsDialog 
+            open={open == "get location"} 
+            handleClose={handleClose}
+            updateData={updateData} 
+            title="Find Locations"/>
+        <GetEventsDialog 
+            open={open == "get event"} 
+            handleClose={handleClose} 
+            updateData={updateData} 
+            title="Find Events"/>
+        <AddSuppliersDialog 
+            open={open == "add supplier"} 
+            handleClose={handleClose} 
+            updateData={updateData} 
+            title="Add Supplier"/>
+        <AddLocationsDialog 
+            open={open == "add location"} 
+            handleClose={handleClose} 
+            updateData={updateData} 
+            title="Add Location"/>
+        <GetOptionOffersDialog
+            open={open == "get option offer"} 
+            handleClose={handleClose} 
+            updateData={updateData} 
+            title="Find Option Offers"/>
+        <GetSuppliersDialog
+            open={open == "get supplier"} 
+            handleClose={handleClose} 
+            updateData={updateData} 
+            title="Get Suppliers"/>
     </div>
   );
 }

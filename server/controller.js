@@ -578,7 +578,6 @@ module.exports = {
                 console.log("results:", result);
             }
         });
-
     },
 
     //Post

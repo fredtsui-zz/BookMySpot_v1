@@ -8,17 +8,19 @@ import DialogTitle from '@material-ui/core/DialogTitle';
 import Button from '@material-ui/core/Button';
 import TextField from '@material-ui/core/TextField';
 
-export default function GetClientsDialog(props) {
+
+export default function GetOptionOffersDialog(props) {
     const {open, handleClose, title, updateData} = props;
     const [query, setQuery] = React.useState({});
+    
     const handleSubmit = async () => {
         let url;
-        if(!query.clientID || query.clientID === "") {
-            url = '/api/getAllClients';
-            console.log('calling get all clients');
+        if(query.SupplierName && query.Type) {
+            url = '/api/getTypeMenuFromSupplier/' + query.SupplierName + '/' + query.Type;
+        } else if(query.SupplierName) {
+            url = '/api/getAllFromSupplier/' + query.SupplierName;
         } else {
-            console.log('calling get clients where ID = ' + query.CLientID);
-            url='/api/getClientsInfoWithClientID/' + query.ClientID;
+            alert('Supplier Name must not be empty');
         }
         const response = await fetch(url);
         const data = await response.json();
@@ -34,20 +36,21 @@ export default function GetClientsDialog(props) {
     }
 
     return (
-        <Dialog open={open} onClose={handleClose} >
+        <Dialog fullWidth open={open} onClose={handleClose} >
             <DialogTitle>{title}</DialogTitle>
             <DialogContent>
-                <DialogContentText>GetClientsFilter</DialogContentText>
-                <TextField onChange={handleChange('ClientID')}/>
-            
+                <DialogContentText>Supplier Name</DialogContentText>
+                <TextField onChange={handleChange('SupplierName')}/>
+                <DialogContentText>Type</DialogContentText>
+                <TextField onChange={handleChange('Type')}/>
             </DialogContent>
-
+        
             <DialogActions>
-                <Button onClick={handleClose} color="primary">
+                <Button onClick={handleClose} color="danger">
                     Cancel
                 </Button>
                 <Button onClick={handleSubmit} color="primary">
-                    Query
+                    Find Offerings
                 </Button>
             </DialogActions>
         </Dialog>
