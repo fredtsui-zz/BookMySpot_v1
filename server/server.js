@@ -39,6 +39,7 @@ app.post('/api/updateLocationOffer', controller.updateLocationOffer);
 //Options Table
 //Get
 app.get('/api/getAllOptionWithType/:Type', controller.getAllOptionWithType);
+app.get('/api/getAllOptionFromLocation/:LocationName', controller.getAllOptionFromLocation);
 //Post
 app.post('/api/insertNewOptions', controller.insertNewOptions);
 
