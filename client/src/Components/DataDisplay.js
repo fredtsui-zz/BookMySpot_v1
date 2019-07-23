@@ -183,7 +183,7 @@ export default function DataDisplay(props) {
                   id = row.EventID;
                 } else if (colnames.includes('LocationName')) {
                   id = row.LocationName;
-                } else if (colnames.includes('OfferID')) {
+                } else if (colnames.includes('OfferID') || colnames.includes('OfferId')) {
                   id = row.OfferID;
                 } else if (colnames.includes('SupplierName')) {
                   id = row.SupplierName;
