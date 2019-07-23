@@ -46,7 +46,7 @@ export default function AddClientsDialog(props) {
         <Dialog open={open} onClose={handleClose} >
             <DialogTitle>{title}</DialogTitle>
             <DialogContent>
-                <DialogContentText>Name</DialogContentText>
+                <DialogContentText>Name *</DialogContentText>
                 <TextField onChange={handleChange('ClientName')}/>
                 <DialogContentText>Address</DialogContentText>
                 <TextField onChange={handleChange('Address')}/>

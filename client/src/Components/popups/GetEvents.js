@@ -59,10 +59,8 @@ export default function GetEventsDialog(props) {
         <Dialog fullWidth open={open} onClose={handleClose} >
             <DialogTitle>{title}</DialogTitle>
             <DialogContent>
-                <DialogContentText>City</DialogContentText>
+                <DialogContentText>Client ID</DialogContentText>
                 <TextField onChange={handleChange('ClientID')}/>
-                <DialogContentText>Province</DialogContentText>
-                <TextField onChange={handleChange('EventID')}/>
                 <DialogContentText>Future Events</DialogContentText>
                 <Checkbox checked={future} onChange={handleChange('future')} value={future}/>
                 <DialogContentText>Past Events</DialogContentText>

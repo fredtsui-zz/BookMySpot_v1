@@ -67,7 +67,7 @@ export default function AddLocationsDialog(props) {
                     Cancel
                 </Button>
                 <Button onClick={handleSubmit} color="primary">
-                    Query
+                    Add
                 </Button>
             </DialogActions>
         </Dialog>
