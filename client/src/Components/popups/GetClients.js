@@ -23,11 +23,11 @@ export default function GetClientsDialog(props) {
     }
     const handleSubmit = async () => {
         let url;
-        if(!query.clientID || query.clientID === "") {
+        if(!query.ClientID || query.ClientID === "") {
             url = '/api/getAllClients';
             console.log('calling get all clients');
         } else {
-            console.log('calling get clients where ID = ' + query.CLientID);
+            console.log('calling get clients where ID = ' + query.ClientID);
             url='/api/getClientsInfoWithClientID/' + query.ClientID;
         }
         const response = await fetch(url);
@@ -47,7 +47,7 @@ export default function GetClientsDialog(props) {
         <Dialog open={open} onClose={handleClose} >
             <DialogTitle>{title}</DialogTitle>
             <DialogContent>
-                <DialogContentText>GetClientsFilter</DialogContentText>
+                <DialogContentText>Client ID</DialogContentText>
                 <TextField onChange={handleChange('ClientID')}/>
             
             </DialogContent>

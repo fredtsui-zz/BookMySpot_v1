@@ -17,7 +17,7 @@ export default function AddOptionOfferDialog(props) {
         </Dialog> );
     }
     const handleSubmit = async () => {
-        if(query.SupplierName) {
+        if(subID) {
             console.log('calling insertNewOptionOffer');
             const response = await fetch('/api/insertNewOptionOffer', {
                 method: 'POST',

@@ -48,7 +48,7 @@ export default function AddSuppliersDialog(props) {
     }
 
     return (
-        <Dialog open={open} onClose={handleClose} >
+        <Dialog fullWidth open={open} onClose={handleClose} >
             <DialogTitle>{title}</DialogTitle>
             <DialogContent>
                 <DialogContentText>Supplier Name *</DialogContentText>
