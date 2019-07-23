@@ -70,7 +70,7 @@ export default function DataDisplay(props) {
     }
 
     const getOptions = (locationID) => async() => {
-      const response = await fetch('/api/getAllRequirementFromOneEvent/' + subID);
+      const response = await fetch('/api/getAllOptionFromLocation/' + subID);
       const data = await response.json();
       updateData(data[0]);
     }
