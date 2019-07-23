@@ -54,7 +54,7 @@ export default function CreateEventsDialog(props) {
                 <TextField onChange={handleChange('LocationName')}/>}
                 <DialogContentText>Event Type</DialogContentText>
                 <TextField onChange={handleChange('Type')}/>
-                <DialogContentText>Start Time</DialogContentText>
+                <DialogContentText>Start Time (e.g. 2019-09-01 09:00:00)</DialogContentText>
                 <TextField onChange={handleChange('StartTime')}/>
                 <DialogContentText>End Time</DialogContentText>
                 <TextField onChange={handleChange('EndTime')}/>
@@ -62,8 +62,6 @@ export default function CreateEventsDialog(props) {
                 <TextField onChange={handleChange('Budget')}/>
                 <DialogContentText>Total People</DialogContentText>
                 <TextField onChange={handleChange('NumberOfInvites')}/>
-                <DialogContentText>Billing Info</DialogContentText>
-                <TextField onChange={handleChange('Bill')}/>
                 
             
             </DialogContent>

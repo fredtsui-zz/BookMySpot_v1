@@ -93,14 +93,8 @@ export default function ControlPanel(props) {
                 <ListItem button onClick={handleOpen('add supplier')}>
                 <ListItemText primary="add suppliers" />
                 </ListItem>
-                <ListItem button onClick={handleOpen('add event')}>
-                <ListItemText primary="add events" />
-                </ListItem>
                 <ListItem button onClick={handleOpen('add location')}>
                 <ListItemText primary="add locations" />
-                </ListItem>
-                <ListItem button onClick={handleOpen('add option offer')}>
-                <ListItemText primary="add option offer" />
                 </ListItem>
                 <ListItem button onClick={handleOpen('get option offer')}>
                 <ListItemText primary="get option offer" />

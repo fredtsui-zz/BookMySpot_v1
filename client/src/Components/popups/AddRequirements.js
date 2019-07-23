@@ -13,20 +13,31 @@ export default function AddRequirementsDialog(props) {
     const [query, setQuery] = React.useState({});
     if(!subID) {
         return <Dialog open={open} onClose={handleClose} >
-            <DialogContentText>No EventID provided</DialogContentText>
+            <DialogContentText>No Offer ID provided</DialogContentText>
         </Dialog>
     }
     const handleSubmit = async () => {
         if(subID) {
             console.log('calling insertNewRequirement');
-            const response = await fetch('/api/insertNewRequirement', {
+            let response = await fetch('/api/insertNewRequirement', {
                 method: 'POST',
                 headers: {
                   'Content-Type': 'application/json',
                 },
-                body: JSON.stringify({...query, EventID: subID}),
+                body: JSON.stringify({...query, OfferId: subID}),
               });
-            const data = await response.text();
+            let data = await response.text();
+            if(!data){
+                console.log('failed');
+            }
+            response = await fetch('/api/updateBill', {
+                method: 'POST',
+                headers: {
+                  'Content-Type': 'application/json',
+                },
+                body: JSON.stringify(query),
+              });
+            data = await response.text();
             if(data){
                 console.log('succeeded', data);
             } else {
@@ -46,8 +57,8 @@ export default function AddRequirementsDialog(props) {
         <Dialog fullWidth open={open} onClose={handleClose} >
             <DialogTitle>{title}</DialogTitle>
             <DialogContent>
-                <DialogContentText>Offer Id</DialogContentText>
-                <TextField onChange={handleChange('OfferId')}/>
+                <DialogContentText>Event ID *</DialogContentText>
+                <TextField onChange={handleChange('EventID')}/>
                 <DialogContentText>Amount</DialogContentText>
                 <TextField onChange={handleChange('Amount')}/>
             </DialogContent>

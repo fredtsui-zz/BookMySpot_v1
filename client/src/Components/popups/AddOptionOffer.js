@@ -46,7 +46,7 @@ export default function AddOptionOfferDialog(props) {
         <Dialog open={open} onClose={handleClose} >
             <DialogTitle>{title}</DialogTitle>
             <DialogContent>
-                <DialogContentText>Option Name</DialogContentText>
+                <DialogContentText>Option Name *</DialogContentText>
                 <TextField onChange={handleChange('OptionName')}/>
                 <DialogContentText>Price</DialogContentText>
                 <TextField onChange={handleChange('Price')}/>

@@ -51,7 +51,7 @@ export default function AddSuppliersDialog(props) {
         <Dialog open={open} onClose={handleClose} >
             <DialogTitle>{title}</DialogTitle>
             <DialogContent>
-                <DialogContentText>Supplier Name</DialogContentText>
+                <DialogContentText>Supplier Name *</DialogContentText>
                 <TextField onChange={handleChange('SupplierName')}/>
                 <DialogContentText>Catering</DialogContentText>
                 <Checkbox checked={query.isCater} onChange={handleChange('isCater')} value={!query.isCater}/>

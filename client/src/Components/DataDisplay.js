@@ -24,7 +24,6 @@ const useStyles = makeStyles(theme => ({
       minWidth: 650,
     },
   }));
-  
 
   
 export default function DataDisplay(props) {
@@ -53,26 +52,30 @@ export default function DataDisplay(props) {
     }
     const classes = useStyles();
     const getClientTotalExpense = (clientID) => async () => {
-      const response = await fetch('/api/getTotalExpenseFromClient/' + clientID);
+      const response = await fetch('/api/getTotalExpenseFromClient/' + subID);
       const data = await response.json();
       updateData(data[0]);
     }
+
     const getSuppliers = (eID) => async () => {
-      const response = await fetch('/api/getAllSuppliersInEvent/' + eID);
+      const response = await fetch('/api/getAllSuppliersInEvent/' + subID);
       const data = await response.json();
       updateData(data[0]);
     }
+
     const getRequirements = (eID) => async() => {
-      const response = await fetch('/api/getAllRequirementFromOneEvent/' + eID);
+      const response = await fetch('/api/getAllRequirementFromOneEvent/' + subID);
       const data = await response.json();
       updateData(data[0]);
     }
-    const needActionButton = 
-            colnames.includes('EventID') || 
-            colnames.includes('LocationID') || 
-            colnames.includes('SupplierID');
+
+    const getOptions = (locationID) => async() => {
+      const response = await fetch('/api/getAllRequirementFromOneEvent/' + subID);
+      const data = await response.json();
+      updateData(data[0]);
+    }
+
     let actionPopup;
-    let clientTotalExpense;
     if(colnames.includes('EventID')) {
       actionPopup = (id) => (
       <Popover
@@ -88,12 +91,11 @@ export default function DataDisplay(props) {
           horizontal: 'center',
         }}>
           <Button onClick={handleOpenPopup('add invitee')}>Invite People</Button>
-          <Button onClick={handleOpenPopup('add requirement')}>Add Requirements</Button>
           <Button onClick={getSuppliers(id)}>Get Suppliers</Button>
           <Button onClick={getRequirements(id)}>Get Requirements</Button>
       </Popover>)
     } else if (colnames.includes('LocationName')) {
-      actionPopup = () => (
+      actionPopup = (id) => (
         <Popover
           open={Boolean(anchorEl)}
           anchorEl={anchorEl}
@@ -107,7 +109,24 @@ export default function DataDisplay(props) {
             horizontal: 'center',
           }}>
             <Button onClick={handleOpenPopup('add event')}>Create Event</Button>
+            <Button onClick={getOptions(id)}>Get Options</Button>
         </Popover>)
+    } else if (colnames.includes('OfferID')){
+      actionPopup = (id) => (
+      <Popover
+          open={Boolean(anchorEl)}
+          anchorEl={anchorEl}
+          onClose={handleCloseAction}
+          anchorOrigin={{
+            vertical: 'bottom',
+            horizontal: 'center',
+          }}
+          transformOrigin={{
+            vertical: 'top',
+            horizontal: 'center',
+          }}>
+            <Button onClick={handleOpenPopup('add requirement')}>Add Requirements</Button>
+        </Popover>);
     } else if (colnames.includes('SupplierName')) {
       actionPopup = () => (
         <Popover
@@ -164,6 +183,8 @@ export default function DataDisplay(props) {
                   id = row.EventID;
                 } else if (colnames.includes('LocationName')) {
                   id = row.LocationName;
+                } else if (colnames.includes('OfferID')) {
+                  id = row.OfferID;
                 } else if (colnames.includes('SupplierName')) {
                   id = row.SupplierName;
                 } else if (colnames.includes('ClientID')) {

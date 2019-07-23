@@ -45,7 +45,7 @@ export default function AddLocationsDialog(props) {
         <Dialog open={open} onClose={handleClose} >
             <DialogTitle>{title}</DialogTitle>
             <DialogContent>
-                <DialogContentText>LocationName</DialogContentText>
+                <DialogContentText>LocationName *</DialogContentText>
                 <TextField onChange={handleChange('LocationID')}/>
                 <DialogContentText>Capability</DialogContentText>
                 <TextField onChange={handleChange('Capability')}/>
