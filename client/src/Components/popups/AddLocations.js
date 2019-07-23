@@ -42,7 +42,7 @@ export default function AddLocationsDialog(props) {
     }
 
     return (
-        <Dialog open={open} onClose={handleClose} >
+        <Dialog fullWidth open={open} onClose={handleClose} >
             <DialogTitle>{title}</DialogTitle>
             <DialogContent>
                 <DialogContentText>LocationName *</DialogContentText>

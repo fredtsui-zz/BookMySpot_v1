@@ -43,7 +43,7 @@ export default function AddClientsDialog(props) {
     }
 
     return (
-        <Dialog open={open} onClose={handleClose} >
+        <Dialog fullWidth open={open} onClose={handleClose} >
             <DialogTitle>{title}</DialogTitle>
             <DialogContent>
                 <DialogContentText>Name *</DialogContentText>

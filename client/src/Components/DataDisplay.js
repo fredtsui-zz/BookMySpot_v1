@@ -111,7 +111,7 @@ export default function DataDisplay(props) {
             <Button onClick={handleOpenPopup('add event')}>Create Event</Button>
             <Button onClick={getOptions(id)}>Get Options</Button>
         </Popover>)
-    } else if (colnames.includes('OfferID')){
+    } else if (colnames.includes('OfferID') || colnames.includes('OfferId')){
       actionPopup = (id) => (
       <Popover
           open={Boolean(anchorEl)}
@@ -125,7 +125,7 @@ export default function DataDisplay(props) {
             vertical: 'top',
             horizontal: 'center',
           }}>
-            <Button onClick={handleOpenPopup('add requirement')}>Add Requirements</Button>
+            <Button onClick={handleOpenPopup('add requirement')}>Add Requirements to Event</Button>
         </Popover>);
     } else if (colnames.includes('SupplierName')) {
       actionPopup = () => (
