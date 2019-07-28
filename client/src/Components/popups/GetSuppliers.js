@@ -30,7 +30,7 @@ export default function GetSuppliersDialog(props) {
         } else if (query.EventID) {
             url = '/api/getAllSuppliersInEvent/' + query.EventID;
         } else {
-            alert('please provide required information');
+            url = '/api/getSuppliers/0/0/0';
         }
         const response = await fetch(url);
         const data = await response.json();
