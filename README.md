@@ -17,12 +17,6 @@ npm install
 ### 2. startup
   `yarn dev`
   
+### 3. Database, schema import
 
-### Presentation:
-- create event:
-- various functionalities
-
-### todo:
- - `updateBill`
- - `getAllOfferFromOfferID`
- - `deleteEventLongTimeAgo`
+- run `database\<latestdump.sql>` in MySQL
