@@ -17,3 +17,6 @@ npm install
 ### 2. startup
   `yarn dev`
   
+### 3. Database, schema import
+
+- run `database\<latestdump.sql>` in MySQL
