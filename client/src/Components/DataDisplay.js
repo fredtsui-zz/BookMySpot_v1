@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React from 'react';
 
 import { makeStyles } from '@material-ui/core/styles';
 import Table from '@material-ui/core/Table';
@@ -167,7 +167,7 @@ export default function DataDisplay(props) {
           <TableHead>
             <TableRow>
                 {colnames && colnames.map((name, index) => {
-                    if(index == 0){
+                    if(index === 0){
                         return (<TableCell >{name} </TableCell>);
                     } else {
                         return (<TableCell align="right">{name} </TableCell>);
@@ -193,7 +193,7 @@ export default function DataDisplay(props) {
                 return (
               <TableRow key={i} >
                 {colnames && colnames.map((col, index) => {
-                    if(index == 0) {
+                    if(index === 0) {
                         return (<TableCell >{row[col]}</TableCell>)
                     } else {
                         return  (<TableCell align="right">{row[col]}</TableCell>)
@@ -211,22 +211,22 @@ export default function DataDisplay(props) {
         </Table>
       </Paper>
       <AddInviteesDialog
-        open={open == "add invitee"} 
+        open={open === "add invitee"} 
         subID={subID}
         handleClose={handleClosePopup}
         title="Add Invitees" />
       <AddRequirementsDialog
-        open={open == "add requirement"} 
+        open={open === "add requirement"} 
         subID={subID}
         handleClose={handleClosePopup}
         title="Add Requirements" />
       <CreateEventsDialog
-        open={open == "add event"} 
+        open={open === "add event"} 
         subID={subID}
         handleClose={handleClosePopup}
         title="Create Events" />
       <AddOptionOfferDialog
-        open={open == "add option offer"} 
+        open={open === "add option offer"} 
         handleClose={handleClosePopup} 
         subID={subID} 
         title="Add Option Offer"/>

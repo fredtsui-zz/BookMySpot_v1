@@ -103,42 +103,42 @@ export default function ControlPanel(props) {
             </List>
         </Paper>
         <GetClientsDialog 
-            open={open == "get client"} 
+            open={open === "get client"} 
             handleClose={handleClose} 
             updateData={updateData} 
             title="Find Clients"/>
         <AddClientsDialog 
-            open={open == "add client"} 
+            open={open === "add client"} 
             handleClose={handleClose} 
             updateData={updateData} 
             title="Add Client"/>
         <GetLocationsDialog 
-            open={open == "get location"} 
+            open={open === "get location"} 
             handleClose={handleClose}
             updateData={updateData} 
             title="Find Locations"/>
         <GetEventsDialog 
-            open={open == "get event"} 
+            open={open === "get event"} 
             handleClose={handleClose} 
             updateData={updateData} 
             title="Find Events"/>
         <AddSuppliersDialog 
-            open={open == "add supplier"} 
+            open={open === "add supplier"} 
             handleClose={handleClose} 
             updateData={updateData} 
             title="Add Supplier"/>
         <AddLocationsDialog 
-            open={open == "add location"} 
+            open={open === "add location"} 
             handleClose={handleClose} 
             updateData={updateData} 
             title="Add Location"/>
         <GetOptionOffersDialog
-            open={open == "get option offer"} 
+            open={open === "get option offer"} 
             handleClose={handleClose} 
             updateData={updateData} 
             title="Find Option Offers"/>
         <GetSuppliersDialog
-            open={open == "get supplier"} 
+            open={open === "get supplier"} 
             handleClose={handleClose} 
             updateData={updateData} 
             title="Get Suppliers"/>
