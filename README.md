@@ -6,6 +6,7 @@ event booking app
 ### 1. prerequisites & installation
 -  required `yarn, npm`
 -  run `npm -g install yarn` to install yarn globally
+-  `nodemon` is required to run backend, run `yarn global add nodemon` to install
 -  when you are in this directory run the following commands to install dependencies 
 ```
 npm install
